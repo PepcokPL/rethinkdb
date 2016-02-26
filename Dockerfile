@@ -8,12 +8,12 @@
 FROM cern/cc7-base
 
 # Install RethinkDB.
-RUN \
-  wget http://download.rethinkdb.com/centos/7/`uname -m`/rethinkdb.repo \
-          -O /etc/yum.repos.d/rethinkdb.repo
 RUN yum -y update
+RUN yum install wget git sudo make gcc gcc-c++ tar curl bzip2 wget python python-devel python-pip python-lxml libxslt-deve
+RUN wget http://download.rethinkdb.com/centos/7/`uname -m`/rethinkdb.repo \
+          -O /etc/yum.repos.d/rethinkdb.repo
 RUN yum -y install rethinkdb
-RUN yum -y install git sudo make gcc gcc-c++ tar curl bzip2 wget python python-devel python-pip python-lxml libxslt-deve
+
 
 # Install python driver for rethinkdb
 RUN pip install rethinkdb
