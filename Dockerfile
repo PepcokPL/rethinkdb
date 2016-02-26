@@ -5,15 +5,15 @@
 #
 
 # Pull base image.
-FROM dockerfile/ubuntu
+FROM cern/cc7-base
 
 # Install RethinkDB.
 RUN \
-  echo "deb http://download.rethinkdb.com/apt `lsb_release -cs` main" > /etc/apt/sources.list.d/rethinkdb.list && \
-  wget -O- http://download.rethinkdb.com/apt/pubkey.gpg | apt-key add - && \
-  apt-get update && \
-  apt-get install -y rethinkdb python-pip && \
-  rm -rf /var/lib/apt/lists/*
+  wget http://download.rethinkdb.com/centos/7/`uname -m`/rethinkdb.repo \
+          -O /etc/yum.repos.d/rethinkdb.repo
+RUN yum -y update
+RUN yum -y install rethinkdb
+RUN yum -y install git sudo make gcc gcc-c++ tar curl bzip2 wget python python-devel python-pip python-lxml libxslt-deve
 
 # Install python driver for rethinkdb
 RUN pip install rethinkdb
