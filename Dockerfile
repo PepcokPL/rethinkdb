@@ -10,7 +10,7 @@ FROM cern/cc7-base
 # Install RethinkDB.
 RUN yum -y update
 RUN yum -y install wget git sudo make gcc gcc-c++ tar curl bzip2 python python-devel \
-python-pip python-lxml libxslt-dev libmysqlclient-dev mysql-devel 
+python-pip python-lxml libxslt-dev libmysqlclient-dev mysql-devel
 RUN wget http://download.rethinkdb.com/centos/7/`uname -m`/rethinkdb.repo \
           -O /etc/yum.repos.d/rethinkdb.repo
 RUN yum -y install rethinkdb
@@ -27,6 +27,7 @@ WORKDIR /data
 
 # Define default command.
 CMD ["rethinkdb", "--bind", "all"]
+RUN rethinkdb
 
 # Expose ports.
 #   - 8080: web UI
