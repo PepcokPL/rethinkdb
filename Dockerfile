@@ -27,7 +27,7 @@ WORKDIR /data
 
 # Define default command.
 CMD ["rethinkdb", "--bind", "all"]
-RUN rethinkdb
+RUN rethinkdb --bind all &
 
 # Expose ports.
 #   - 8080: web UI
